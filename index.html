@@ -1,23 +1,30 @@
 <html>
   <head>
-    <meta content='' property='og:description'>
+    <meta charset="UTF-8">
+    <title>random</title>
+    <meta property="og:url" content="https://champierre.github.io/random?items=foo,bar"/>
+    <meta property="og:title" content="random"/>
+    <meta property="og:description" content=""/>
+    <meta property="og:site_name" content="random"/>
   </head>
-    <body>
-      <script>
-        const shuffle = ([...array]) => {
-          for (let i = array.length - 1; i >= 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-          }
-          return array;
+  <body>
+    <div id="items"></div>
+    <script>
+      const shuffle = ([...array]) => {
+        for (let i = array.length - 1; i >= 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
         }
+        return array;
+      }
 
-        const params = new URLSearchParams(window.location.search)
-        if (params.has('items')) {
-          const items = params.get('items').split(',');
-          const itemsShuffled = shuffle(items).join(',');
-          document.querySelector('meta[property="og:description"]').setAttribute("content", itemsShuffled);
-        }
-      </script>
-    </body>
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('items')) {
+        const items = params.get('items').split(',');
+        const itemsShuffled = shuffle(items).join(',');
+        document.getElementById("items").innerHTML = itemsShuffled;
+        document.querySelector('meta[property="og:description"]').setAttribute("content", itemsShuffled);
+      }
+    </script>
+  </body>
 </html>
